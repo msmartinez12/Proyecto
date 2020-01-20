@@ -1,0 +1,6 @@
+Mateo;Tare1;10
+Mateo;Tarea2;9
+Mateo;Tarea3;8
+Fbian;Tare1;8
+Fbian;Tarea2;9
+Fbian;Tarea3;10
