@@ -1,0 +1,15 @@
+Maria;Lecciones Escritas;3.0
+Maria;Leccion orales;7.0
+Maria;Lecciones;10.0
+David;Lecciones Escritas;10.0
+David;Leccion orales;5.0
+David;Lecciones;7.0
+Diego;Lecciones Escritas;6.0
+Diego;Leccion orales;8.0
+Diego;Lecciones;2.0
+Mateo;Lecciones Escritas;5.0
+Mateo;Leccion orales;5.0
+Mateo;Lecciones;5.0
+Luis;Lecciones Escritas;10.0
+Luis;Leccion orales;5.0
+Luis;Lecciones;4.0

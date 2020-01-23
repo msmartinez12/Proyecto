@@ -15,6 +15,7 @@ public class ProyectoV1 {
 
         try {
             File archivo = new File(usuario + ".txt");
+            //en el caso de que el usuario no exista se piden los datos iniciales
             if (!archivo.exists()) {
                 archivo.createNewFile();
 
@@ -26,41 +27,107 @@ public class ProyectoV1 {
                 String[] nombreActividades = new String[actividadesTotales];
 
                 for (int i = 0; i < actividadesTotales; i++) {
+
+                    sc.nextLine();
                     System.out.print("Ingrese el nombre de la actividad " + (i + 1) + ": ");
-                    nombreActividades[i] = sc.next();
+                    nombreActividades[i] = sc.nextLine();
 
                 }
 
                 PrintWriter pw = new PrintWriter(archivo);
 
                 String[] nombreAlumnos = new String[numAlumnos];
-                int[][] notas = new int[numAlumnos][actividadesTotales];
+                double[][] notas = new double[numAlumnos][actividadesTotales]; //aqui..............................
 
                 for (int i = 0; i < numAlumnos; i++) {
+                    sc.nextLine();
                     System.out.print("Ingrese el nombre del alumno " + (i + 1) + ": ");
-                    nombreAlumnos[i] = sc.next();
+                    nombreAlumnos[i] = sc.nextLine();
                     for (int j = 0; j < actividadesTotales; j++) {
                         System.out.print("Nota de " + nombreAlumnos[i] + " en la actividad " + nombreActividades[j] + ": ");
-                        notas[i][j] = sc.nextInt();
+                        notas[i][j] = sc.nextDouble();
 
                         pw.println(nombreAlumnos[i] + ";" + nombreActividades[j] + ";" + notas[i][j]);
                     }
 
                 }
                 pw.close();
+                //en el caso de que el usuario exista se muestran los datos
             } else {
                 System.out.println("Usted a ingresado");
                 Scanner entrada = new Scanner(archivo);
-
+                int c = 0; //la c sirve para contar el numero de lineas del documento;
+                int p = 0; // la p cuneta el numero de personas
                 String[] calificaciones = new String[3];
+                String nombre = ""; //ayuda a comparar los nombres para verificar cuantas personas hay;
+                
                 while (entrada.hasNextLine()) {
+                    c++;
                     calificaciones = entrada.nextLine().split(";");
-                    
-                    System.out.printf("%-5s%10s%5s\n", calificaciones[0],calificaciones[1],calificaciones[2]);
+                    if (nombre.equals(calificaciones[0])) {
+                    } else {
+                        nombre = calificaciones[0];
+                        p++;
+                    }
+                }
+                
+                
+                String[] nombreAlumnos = new String[p];
+                String[] nombreActividades = new String[c / p];
+                Double[] notas = new Double[p * nombreActividades.length];
+
+                int z = 0; // z sirve de contador
+
+                // se abre un nuevo scanner pues el anteiror quedo en la ultima linea
+                Scanner entrada1 = new Scanner(archivo);
+
+                while (z < c / p) {
+
+                    calificaciones = entrada1.nextLine().split(";");
+                    nombreActividades[z] = calificaciones[1];
+                    z++;
+                }
+
+                Scanner entrada2 = new Scanner(archivo);
+
+                nombre = "";
+                z = 0; //se vuelve a inicializar el contador para no abrir una nueva variable.
+
+                while (z < p) {
+                    calificaciones = entrada2.nextLine().split(";");
+                    if (nombre.equals(calificaciones[0])) {
+                    } else {
+                        nombre = calificaciones[0];
+                        nombreAlumnos[z] = calificaciones[0];
+                        z++;
+                    }
+                }
+                z = 0;
+                Scanner entrada3 = new Scanner(archivo);
+
+                while (entrada3.hasNextLine()) {
+                    calificaciones = entrada3.nextLine().split(";");
+                    notas[z] = Double.parseDouble(calificaciones[2]);
+                    z++;
+                }
+                for (int i = 0; i < nombreActividades.length; i++) {
+                    System.out.printf("%25s", nombreActividades[i]);
+                }
+
+                System.out.println("");
+                int k = 0;
+
+                for (int i = 0; i < p; i++) {
+                    System.out.printf("%-10s", nombreAlumnos[i]);
+                    for (int j = 0; j < nombreActividades.length; j++) {
+                        System.out.printf("%15s          ", notas[k]);
+                        k++;
+                    }
+                    System.out.println("");
                 }
             }
         } catch (Exception e) {
-            System.out.print("Error " + e.getMessage());
+            System.err.print("Error " + e.getLocalizedMessage());
         }
 
     }
