@@ -27,8 +27,10 @@ public class ProyectoV1 {
                 String[] nombreActividades = new String[actividadesTotales];
 
                 for (int i = 0; i < actividadesTotales; i++) {
+                    if (i == 0) {
+                        sc.nextLine();
+                    }
 
-                    sc.nextLine();
                     System.out.print("Ingrese el nombre de la actividad " + (i + 1) + ": ");
                     nombreActividades[i] = sc.nextLine();
 
@@ -40,12 +42,13 @@ public class ProyectoV1 {
                 double[][] notas = new double[numAlumnos][actividadesTotales]; //aqui..............................
 
                 for (int i = 0; i < numAlumnos; i++) {
-                    sc.nextLine();
+                    System.out.println("");
                     System.out.print("Ingrese el nombre del alumno " + (i + 1) + ": ");
                     nombreAlumnos[i] = sc.nextLine();
                     for (int j = 0; j < actividadesTotales; j++) {
                         System.out.print("Nota de " + nombreAlumnos[i] + " en la actividad " + nombreActividades[j] + ": ");
                         notas[i][j] = sc.nextDouble();
+                        sc.nextLine();
 
                         pw.println(nombreAlumnos[i] + ";" + nombreActividades[j] + ";" + notas[i][j]);
                     }
@@ -60,7 +63,7 @@ public class ProyectoV1 {
                 int p = 0; // la p cuneta el numero de personas
                 String[] calificaciones = new String[3];
                 String nombre = ""; //ayuda a comparar los nombres para verificar cuantas personas hay;
-                
+
                 while (entrada.hasNextLine()) {
                     c++;
                     calificaciones = entrada.nextLine().split(";");
@@ -70,8 +73,7 @@ public class ProyectoV1 {
                         p++;
                     }
                 }
-                
-                
+
                 String[] nombreAlumnos = new String[p];
                 String[] nombreActividades = new String[c / p];
                 Double[] notas = new Double[p * nombreActividades.length];
@@ -95,8 +97,7 @@ public class ProyectoV1 {
 
                 while (z < p) {
                     calificaciones = entrada2.nextLine().split(";");
-                    if (nombre.equals(calificaciones[0])) {
-                    } else {
+                    if (!nombre.equals(calificaciones[0])) {
                         nombre = calificaciones[0];
                         nombreAlumnos[z] = calificaciones[0];
                         z++;

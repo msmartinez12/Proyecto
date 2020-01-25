@@ -1,0 +1,6 @@
+Jose;Tarea 1;8.0
+Jose;Tarea 2;9.0
+Maria;Tarea 1;5.0
+Maria;Tarea 2;8.0
+Soto;Tarea 1;8.0
+Soto;Tarea 2;7.0
