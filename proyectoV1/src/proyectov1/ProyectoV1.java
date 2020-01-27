@@ -39,8 +39,8 @@ public class ProyectoV1 {
                 PrintWriter pw = new PrintWriter(archivo);
 
                 String[] nombreAlumnos = new String[numAlumnos];
-                double[][] notas = new double[numAlumnos][actividadesTotales]; //aqui..............................
-
+                double[][] notas = new double[numAlumnos][actividadesTotales];
+                double suma = 0;
                 for (int i = 0; i < numAlumnos; i++) {
                     System.out.println("");
                     System.out.print("Ingrese el nombre del alumno " + (i + 1) + ": ");
@@ -49,8 +49,8 @@ public class ProyectoV1 {
                         System.out.print("Nota de " + nombreAlumnos[i] + " en la actividad " + nombreActividades[j] + ": ");
                         notas[i][j] = sc.nextDouble();
                         sc.nextLine();
-
-                        pw.println(nombreAlumnos[i] + ";" + nombreActividades[j] + ";" + notas[i][j]);
+                        suma = suma + notas[i][j];
+                        pw.print(nombreAlumnos[i] + ";" + nombreActividades[j] + ";" + notas[i][j] + ";");
                     }
 
                 }
@@ -73,7 +73,8 @@ public class ProyectoV1 {
                         p++;
                     }
                 }
-
+                entrada.close();
+                
                 String[] nombreAlumnos = new String[p];
                 String[] nombreActividades = new String[c / p];
                 Double[] notas = new Double[p * nombreActividades.length];
@@ -89,6 +90,8 @@ public class ProyectoV1 {
                     nombreActividades[z] = calificaciones[1];
                     z++;
                 }
+                
+                entrada1.close();
 
                 Scanner entrada2 = new Scanner(archivo);
 
@@ -104,19 +107,38 @@ public class ProyectoV1 {
                     }
                 }
                 z = 0;
+                
+                entrada2.close();
+                
                 Scanner entrada3 = new Scanner(archivo);
+
+                double[] promedio = new double[p];
+                double suma = 0;
 
                 while (entrada3.hasNextLine()) {
                     calificaciones = entrada3.nextLine().split(";");
                     notas[z] = Double.parseDouble(calificaciones[2]);
                     z++;
                 }
+                
+                entrada3.close();
+
+                int k = 0;
+                for (int i = 0; i < p; i++) {
+                    suma = 0;
+                    for (int j = 0; j < nombreActividades.length; j++) {
+                        suma = suma + notas[k];
+                        k++;
+                    }
+                    promedio[i] = suma/nombreActividades.length;
+                }
                 for (int i = 0; i < nombreActividades.length; i++) {
                     System.out.printf("%25s", nombreActividades[i]);
                 }
+                System.out.printf("%14s", "Promedio");
 
                 System.out.println("");
-                int k = 0;
+                k = 0;
 
                 for (int i = 0; i < p; i++) {
                     System.out.printf("%-10s", nombreAlumnos[i]);
@@ -124,8 +146,10 @@ public class ProyectoV1 {
                         System.out.printf("%15s          ", notas[k]);
                         k++;
                     }
+                    System.out.printf("%.2f",promedio[i]);
                     System.out.println("");
                 }
+
             }
         } catch (Exception e) {
             System.err.print("Error " + e.getLocalizedMessage());
