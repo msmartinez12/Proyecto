@@ -1,0 +1,3 @@
+Certificado de Saldos
+dentificacion del cliente: 1234567890
+Saldo a la fecha: 800
